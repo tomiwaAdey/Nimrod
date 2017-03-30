@@ -7,7 +7,7 @@ You hand Nimrod a google spreadsheet with the details of your prospects, and it 
 
 * To get started, get a list of prospect in a google spreadsheet. [Click here to get a sample template](https://docs.google.com/spreadsheets/u/2/d/1NTHbSxdr9PMKXf-wpWwaT44FR8YuLqRMPrURWwvaGC0/edit). It’s important that you do not change the format of the columns
 * Clone this repo in a local folder
-###If you are using mac, you will already have ruby pre-installed on your machine
+### If you are using mac, you will already have ruby pre-installed on your machine
 * Run these commands in terminal:
 ```
 gem install google_drive
@@ -18,7 +18,7 @@ gem install watir-webdriver
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
-###If you are using windows:
+### If you are using windows:
 * Install Ruby with [Ruby Installer](https://rubyinstaller.org/downloads/)
 * Install [DevKit](http://rubyinstaller.org/add-ons/devkit/)
 * Install [phantomjs](https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip)
