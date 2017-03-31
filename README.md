@@ -49,7 +49,8 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 * Install Ruby with [Ruby Installer](https://rubyinstaller.org/downloads/)
 * Install [DevKit](http://rubyinstaller.org/add-ons/devkit/)
 * Install [phantomjs](https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip)
-* Then run `gem install watir-webdriver`
+* run `gem install watir-webdriver`
+* Then run `gem install google_drive`
 ### Now that the setup is done,
 * Navigate to the Nimrod folder and open it in your favourite code editor
 * Fill in your details in `@your_config`
