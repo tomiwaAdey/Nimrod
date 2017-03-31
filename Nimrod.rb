@@ -73,7 +73,7 @@ require "watir-webdriver"
 
 # Creates a session. This will prompt the credential via command line for the
 # first time and save it to config.json file for later usages.
-session = GoogleDrive::Session.from_config("google_drive_config.json")
+session = GoogleDrive::Session.from_config("gdrive_config.json")
 
 # Go to spreadsheet
 ws = session.spreadsheet_by_key(@your_config[:google_sheet_key]).worksheets[0]
@@ -82,32 +82,6 @@ ws = session.spreadsheet_by_key(@your_config[:google_sheet_key]).worksheets[0]
 # To do
 #replace sleeps with wait timeouts
 #https://ruby-doc.org/stdlib-2.4.1/libdoc/timeout/rdoc/Timeout.html
-
-=begin
-def get_proxy_address
-	begin
-		browser = Watir::Browser.new :phantomjs
-		#maximize the browser
-		browser.driver.manage.window.maximize
-		browser.goto('http://proxylist.hidemyass.com')
-		ip = ''
-		browser.element(:xpath => '//*[@id="listable"]/tbody/tr[1]/td[2]/span').spans.select {|s| (s.visible?) ? ip << s.text : '';}
-		port = browser.element(:xpath => '//*[@id="listable"]/tbody/tr[1]/td[3]').text
-	end until IPAddress.valid? ip
-	return "#{ip}" + ":" + "#{port}"
-end
-
-def with_timeout_handling
-	begin
-		Timeout::timeout(120) do
-			yield
-		end
-	rescue Timeout::Error
-		nil
-	end
-end
-=end
-
 
 def open_browser
 	#open new browser
@@ -130,7 +104,6 @@ def email_hunter(browser, first_name, last_name, domain)
 	browser.text_field(:name => @email_hunter[:email_field]).set @your_config[:email_hunter_email]
 	browser.text_field(:name => @email_hunter[:password_field]).set @your_config[:email_hunter_password]
 	browser.button(:value => @email_hunter[:login_button]).click
-	#browser.button(:value => @email_hunter[:login_button]).click
 	sleep 30 #wait for it to set the session
   browser.text_field(:id => @email_hunter[:website_field]).set domain
 	browser.button(:id => @email_hunter[:button]).click
@@ -186,16 +159,11 @@ def find_that_email(browser, first_name, last_name, domain)
 	browser.text_field(:name => @find_that_email[:password_field]).set @your_config[:find_that_email_password]
 	browser.execute_script('$("#t_sign_submit").click()')
 	sleep 30
-	#browser.execute_script('$(".t_inputtext_home").click()')
-  #browser.text_field(:name => @find_that_email[:name_field]).set "#{first_name}" + ' ' + "#{last_name}"
-
   browser.text_field(:name => @find_that_email[:first_name_field]).set first_name
   browser.text_field(:name => @find_that_email[:last_name_field]).set last_name
   browser.text_field(:name => @find_that_email[:website_field]).set domain #Can't use xpath because id changes
-  #browser.div(:id => @find_that_email[:button]).click
 	sleep 5
 	browser.execute_script('$("#t_my_app_add_button").click()')
-	#browser.form(:id =>'h_u_test').submit
 	sleep 30
 	if browser.div(:xpath=>@find_that_email[:answer_div]).exists?
 		return browser.div(:xpath=>@find_that_email[:answer_div]).text.strip
@@ -204,9 +172,6 @@ def find_that_email(browser, first_name, last_name, domain)
 	end
 
 end
-
-#browser.screenshot.save("screenshots/3.png")
-#browser.execute_script('$("#get_domain_data").click();')
 
 def whois(browser, first_name, last_name, domain)
 	browser.goto('https://www.whoisxmlapi.com/?domainName=' + domain + '&outputFormat=xml')
